@@ -1,0 +1,47 @@
+<div fxLayout="row">
+
+  <div fxFlex="10">
+    <button mat-raised-button color="primary" (click)="getHome()">Home</button>
+    <button mat-raised-button color="primary" (click)="clear()" *ngIf="this.books.length; else showGet">Clear</button>
+    <ng-template #showGet>
+      <button mat-raised-button color="primary" (click)="getBooks()">Get Books</button>
+    </ng-template>
+  </div>
+
+  <table fxFlex="90" *ngIf="books && books.length > 0" mat-table [dataSource]="books" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef> Url </th>
+      <td mat-cell *matCellDef="let book"> {{ book.url }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let book"> {{ book.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isbn">
+      <th mat-header-cell *matHeaderCellDef> ISBN </th>
+      <td mat-cell *matCellDef="let book"> {{ book.isbn }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfPages">
+      <th mat-header-cell *matHeaderCellDef> Pages </th>
+      <td mat-cell *matCellDef="let book"> {{ book.numberOfPages }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="publisher">
+      <th mat-header-cell *matHeaderCellDef> Publisher </th>
+      <td mat-cell *matCellDef="let book"> {{ book.publisher }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="released">
+      <th mat-header-cell *matHeaderCellDef> Released </th>
+      <td mat-cell *matCellDef="let book"> {{ book.released | date }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>
